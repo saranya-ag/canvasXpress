@@ -31,6 +31,7 @@
 #' @param vennData venn visualization data
 #' @param vennLegend venn visualization legend
 #' @param genomeData genome visualization data
+#' @param newickData dendrogram data in Newick format
 #' @param graphType type of graph to be plotted - default = 'Scatter2D'
 #' @param events user-defined events (eg. mousemove, mouseout, click and dblclick)
 #' @param afterRender event triggered after rendering
@@ -47,7 +48,7 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
                          smpAnnot = NULL, varAnnot = NULL, 
                          nodeData = NULL, edgeData = NULL, 
                          vennData = NULL, vennLegend = NULL, 
-                         genomeData = NULL, 
+                         genomeData = NULL, newickData = NULL,
                          graphType='Scatter2D', 
                          events=NULL, afterRender=NULL, 
                          width=600, height=400, 
@@ -57,13 +58,13 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
                            smpAnnot, varAnnot, 
                            nodeData, edgeData, 
                            vennData, vennLegend, 
-                           genomeData, 
+                           genomeData, newickData,
                            graphType)
     assertCanvasXpressDataFrame(data, decorData, 
                                 smpAnnot, varAnnot, 
                                 nodeData, edgeData, 
                                 vennData, vennLegend, 
-                                genomeData, 
+                                genomeData, newickData,
                                 graphType)
     dataframe = "columns"
     
@@ -121,10 +122,15 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
             }
             z <- lapply(convertRowsToList(t(varAnnot)), function (d) if (length(d) > 1) d else list(d))
         }
+        
+        data <- list(y = y, x = x, z = z)
+        
         if (!is.null(decorData)) {
-            data <- list(y = y, x = x, z = z, d = decorData)
-        } else {
-            data <- list(y = y, x = x, z = z)
+            data[["d"]] <- decorData
+        } 
+        
+        if (!is.null(newickData)) {
+            data[["t"]] <- newickData
         }
     }
     

@@ -1,5 +1,5 @@
 
-assertCanvasXpressData <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL, vennLegend = NULL, genomeData = NULL, graphType = 'Scatter2D') {
+assertCanvasXpressData <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL, vennLegend = NULL, genomeData = NULL, newickData = NULL, graphType = 'Scatter2D') {
     
     if (graphType == 'Network') {
         if (is.null(nodeData)) {
@@ -26,7 +26,7 @@ assertCanvasXpressData <- function(data = NULL, decorData = NULL, smpAnnot = NUL
     
 }
 
-assertCanvasXpressDataFrame <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL, vennLegend = NULL, genomeData = NULL, graphType = 'Scatter2D') {
+assertCanvasXpressDataFrame <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL, vennLegend = NULL, genomeData = NULL, newickData = NULL, graphType = 'Scatter2D') {
     
     if (graphType == 'Network') {
         if (!is.null(nodeData) && !is.data.frame(nodeData) && !is.matrix(nodeData)) {
