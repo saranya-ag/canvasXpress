@@ -1,5 +1,9 @@
 
-assertCanvasXpressData <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL, vennLegend = NULL, genomeData = NULL, newickData = NULL, graphType = 'Scatter2D') {
+assertCanvasXpressData <- function(graphType = 'Scatter2D',
+                                   data = NULL, 
+                                   nodeData = NULL, edgeData = NULL, 
+                                   vennData = NULL, vennLegend = NULL, 
+                                   genomeData = NULL) {
     
     if (graphType == 'Network') {
         if (is.null(nodeData)) {
@@ -26,7 +30,11 @@ assertCanvasXpressData <- function(data = NULL, decorData = NULL, smpAnnot = NUL
     
 }
 
-assertCanvasXpressDataFrame <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL, vennLegend = NULL, genomeData = NULL, newickData = NULL, graphType = 'Scatter2D') {
+assertCanvasXpressDataFrame <- function(graphType = 'Scatter2D',
+                                        data = NULL, smpAnnot = NULL, varAnnot = NULL, 
+                                        nodeData = NULL, edgeData = NULL, 
+                                        vennData = NULL, vennLegend = NULL, 
+                                        genomeData = NULL) {
     
     if (graphType == 'Network') {
         if (!is.null(nodeData) && !is.data.frame(nodeData) && !is.matrix(nodeData)) {
@@ -61,7 +69,7 @@ assertCanvasXpressDataFrame <- function(data = NULL, decorData = NULL, smpAnnot 
         }
         for (c in comp) {
             if (!c %in% colnames(vennData)) {
-                stop(cat("missing '", c, "' header in edgeData dataframe.", sep=''))
+                stop(cat("missing '", c, "' header in edgeData dataframe.", sep = ''))
             }
         }
     } else if (graphType == 'Genome') {
@@ -99,7 +107,7 @@ assignCanvasXpressRownames <- function(x) {
 }
 
 
-seq_row <- function (x) {
+seq_row <- function(x) {
     # From BBmisc
     seq_len(nrow(x))
 }

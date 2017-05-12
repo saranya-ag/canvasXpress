@@ -52,22 +52,18 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
                          graphType='Scatter2D', 
                          events=NULL, afterRender=NULL, 
                          width=600, height=400, 
-                         pretty=FALSE, digits=4, ...) {
+                         pretty=FALSE, digits=4, ..., boxplotGroupData=NULL) {
     
-    assertCanvasXpressData(data, decorData, 
-                           smpAnnot, varAnnot, 
+    assertCanvasXpressData(graphType, data, 
                            nodeData, edgeData, 
                            vennData, vennLegend, 
-                           genomeData, newickData,
-                           graphType)
-    assertCanvasXpressDataFrame(data, decorData, 
+                           genomeData)
+    assertCanvasXpressDataFrame(graphType, data, 
                                 smpAnnot, varAnnot, 
                                 nodeData, edgeData, 
                                 vennData, vennLegend, 
-                                genomeData, newickData,
-                                graphType)
+                                genomeData)
     dataframe = "columns"
-    
     if (graphType == 'Network') {
         nodes <- NULL
         edges <- NULL
@@ -93,6 +89,39 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
     else if (graphType == 'Genome') {
         #TBD
     } 
+    else if (graphType == 'Boxplot' && !is.null(boxplotGroupData)) {
+
+warning('needs to be finished and consolidated')
+        
+        vars = as.list(assignCanvasXpressRownames(data))
+        smps = as.list(assignCanvasXpressColnames(data))
+        
+        boxgroupdata <- as.list(assignCanvasXpressRownames(boxplotGroupData))
+
+        dy <- as.matrix(data, nrow = nrow(data))
+        dimnames(dy) <- NULL
+
+        y <- list(vars = "Variable1", 
+                  smps = smps,
+                  iqr1 = as.numeric(dy[1,]), 
+                  iqr3 = as.numeric(dy[2,]), 
+                  median = as.numeric(dy[3,]),
+                  qtl1 = as.numeric(dy[4,]), 
+                  qtl3 = as.numeric(dy[5,])
+                  )
+        x <- NULL
+        z <- NULL
+        
+        data <- list(y = y, x = x, z = z)
+        
+        if (!is.null(decorData)) {
+            data[["d"]] <- decorData
+        } 
+        
+        if (!is.null(newickData)) {
+            data[["t"]] <- newickData
+        }
+    }
     else {
         vars = as.list(assignCanvasXpressRownames(data))
         smps = as.list(assignCanvasXpressColnames(data))
@@ -148,6 +177,8 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
               config = config, 
               events = events, 
               afterRender = afterRender)
+    
+save(cx, file = "testing.me.RData")
     
     ## toJSON option
     options(htmlwidgets.TOJSON_ARGS = list(dataframe = dataframe, 
