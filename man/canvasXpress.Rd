@@ -6,9 +6,10 @@
 \usage{
 canvasXpress(data = NULL, decorData = NULL, smpAnnot = NULL,
   varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL,
-  vennLegend = NULL, genomeData = NULL, graphType = "Scatter2D",
-  events = NULL, afterRender = NULL, width = 600, height = 400,
-  pretty = FALSE, digits = 4, ...)
+  vennLegend = NULL, genomeData = NULL, newickData = NULL,
+  graphType = "Scatter2D", events = NULL, afterRender = NULL,
+  width = 600, height = 400, pretty = FALSE, digits = 4, ...,
+  boxplotGroupData = FALSE)
 }
 \arguments{
 \item{data}{canvasXpress data frame
@@ -30,6 +31,8 @@ canvasXpress(data = NULL, decorData = NULL, smpAnnot = NULL,
 
 \item{genomeData}{genome visualization data}
 
+\item{newickData}{dendrogram data in Newick format}
+
 \item{graphType}{type of graph to be plotted - default = 'Scatter2D'}
 
 \item{events}{user-defined events (eg. mousemove, mouseout, click and dblclick)}
@@ -45,6 +48,9 @@ canvasXpress(data = NULL, decorData = NULL, smpAnnot = NULL,
 \item{digits}{display digits - default = 4}
 
 \item{...}{additional configuration options passed to canvasXpress}
+
+\item{boxplotGroupData}{whether the data provided is pre-calculated boxplot data
+(iqr1, iqr3, qtl1, qtl3, and median)}
 }
 \value{
 htmlwidget object
@@ -53,3 +59,4 @@ htmlwidget object
 Custom HTML widget creation function based on widget YAML and JavaScript for 
 use in any html-compatible context
 }
+

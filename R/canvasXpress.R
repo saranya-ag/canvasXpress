@@ -40,6 +40,8 @@
 #' @param pretty print tagged code (json/html) nicely - default = FALSE
 #' @param digits display digits - default = 4
 #' @param ... additional configuration options passed to canvasXpress
+#' @param boxplotGroupData whether the data provided is pre-calculated boxplot data
+#' (iqr1, iqr3, qtl1, qtl3, and median)
 #' 
 #' @return htmlwidget object
 #'
@@ -52,7 +54,8 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
                          graphType='Scatter2D', 
                          events=NULL, afterRender=NULL, 
                          width=600, height=400, 
-                         pretty=FALSE, digits=4, ..., boxplotGroupData=FALSE) {
+                         pretty=FALSE, digits=4, ..., 
+                         boxplotGroupData=FALSE) {
     
     assertCanvasXpressData(graphType, data, 
                            nodeData, edgeData, 
