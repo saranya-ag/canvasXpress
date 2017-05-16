@@ -52,7 +52,7 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
                          graphType='Scatter2D', 
                          events=NULL, afterRender=NULL, 
                          width=600, height=400, 
-                         pretty=FALSE, digits=4, ..., boxplotGroupData=NULL) {
+                         pretty=FALSE, digits=4, ..., boxplotGroupData=FALSE) {
     
     assertCanvasXpressData(graphType, data, 
                            nodeData, edgeData, 
@@ -89,28 +89,67 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
     else if (graphType == 'Genome') {
         #TBD
     } 
-    else if (graphType == 'Boxplot' && !is.null(boxplotGroupData)) {
+    else if (graphType == 'Boxplot' && boxplotGroupData) {
 
 warning('needs to be finished and consolidated')
         
         vars = as.list(assignCanvasXpressRownames(data))
         smps = as.list(assignCanvasXpressColnames(data))
         
-        boxgroupdata <- as.list(assignCanvasXpressRownames(boxplotGroupData))
+        # check var rownames
+        if (!("iqr1" %in% vars) || !("iqr3" %in% vars) ||
+            !("qtl1" %in% vars) || !("qtl3" %in% vars) ||
+            !("median" %in% vars)) {
+            stop('Incorrect Vars for Boxplot Group Data!\n', 'Must include: <iqr1, iqr3, qtl1, qtl3, median>')
+        }
 
-        dy <- as.matrix(data, nrow = nrow(data))
-        dimnames(dy) <- NULL
+        iqr1 = as.matrix(data["iqr1", ])
+        dimnames(iqr1) <- NULL
+        
+        iqr3 = as.matrix(data["iqr3" ,])
+        dimnames(iqr3) <- NULL
+        
+        median = as.matrix(data["median" ,])
+        dimnames(median) <- NULL
+        
+        qtl1 = as.matrix(data["qtl1" ,])
+        dimnames(qtl1) <- NULL
+        
+        qtl3 = as.matrix(data["qtl3" ,])
+        dimnames(qtl3) <- NULL
 
-        y <- list(vars = "Variable1", 
+        y <- list(vars = as.list(c("Variable1")),
                   smps = smps,
-                  iqr1 = as.numeric(dy[1,]), 
-                  iqr3 = as.numeric(dy[2,]), 
-                  median = as.numeric(dy[3,]),
-                  qtl1 = as.numeric(dy[4,]), 
-                  qtl3 = as.numeric(dy[5,])
+                  iqr1 = iqr1, 
+                  iqr3 = iqr3, 
+                  median = median,
+                  qtl1 = qtl1,
+                  qtl3 = qtl3
                   )
         x <- NULL
         z <- NULL
+        
+        if (!is.null(smpAnnot)) {
+            vars2 = as.list(assignCanvasXpressRownames(smpAnnot))
+            smps2 = as.list(assignCanvasXpressColnames(smpAnnot))
+            if (!identical(vars2, smps)) {
+                smpAnnot <- t(smpAnnot)
+                vars2 = as.list(assignCanvasXpressRownames(smpAnnot))
+                smps2 = as.list(assignCanvasXpressColnames(smpAnnot))
+            }
+            if (!identical(vars2, smps)) {
+                stop("Column names in smpAnnot are different from column names in data")
+            }
+            x <- lapply(convertRowsToList(t(smpAnnot)), function (d) if (length(d) > 1) d else list(d))
+        }
+        if (!is.null(varAnnot)) {
+            vars3 = as.list(assignCanvasXpressRownames(varAnnot))
+            smps3 = as.list(assignCanvasXpressColnames(varAnnot))
+            if (!identical(vars3, vars)) {
+                stop("Row names in varAnnot are different from row names in data")
+            }
+            z <- lapply(convertRowsToList(t(varAnnot)), function (d) if (length(d) > 1) d else list(d))
+        }
         
         data <- list(y = y, x = x, z = z)
         
@@ -177,8 +216,6 @@ warning('needs to be finished and consolidated')
               config = config, 
               events = events, 
               afterRender = afterRender)
-    
-save(cx, file = "testing.me.RData")
     
     ## toJSON option
     options(htmlwidgets.TOJSON_ARGS = list(dataframe = dataframe, 
