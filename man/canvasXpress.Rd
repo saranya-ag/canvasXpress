@@ -9,7 +9,7 @@ canvasXpress(data = NULL, decorData = NULL, smpAnnot = NULL,
   vennLegend = NULL, genomeData = NULL, newickData = NULL,
   graphType = "Scatter2D", events = NULL, afterRender = NULL,
   width = 600, height = 400, pretty = FALSE, digits = 4, ...,
-  boxplotGroupData = FALSE)
+  boxplotGroupData = NULL)
 }
 \arguments{
 \item{data}{canvasXpress data frame
@@ -49,8 +49,9 @@ canvasXpress(data = NULL, decorData = NULL, smpAnnot = NULL,
 
 \item{...}{additional configuration options passed to canvasXpress}
 
-\item{boxplotGroupData}{whether the data provided is pre-calculated boxplot data
-(iqr1, iqr3, qtl1, qtl3, and median)}
+\item{boxplotGroupData}{character label for grouped boxplot data.  If there is a 
+non-null value and graphType is 'Boxplot' pre-calculated boxplot data is used from
+the variables (iqr1, iqr3, qtl1, qtl3, median)}
 }
 \value{
 htmlwidget object

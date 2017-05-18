@@ -40,8 +40,9 @@
 #' @param pretty print tagged code (json/html) nicely - default = FALSE
 #' @param digits display digits - default = 4
 #' @param ... additional configuration options passed to canvasXpress
-#' @param boxplotGroupData whether the data provided is pre-calculated boxplot data
-#' (iqr1, iqr3, qtl1, qtl3, and median)
+#' @param boxplotGroupData character label for grouped boxplot data.  If there is a 
+#' non-null value and graphType is 'Boxplot' pre-calculated boxplot data is used from
+#' the variables (iqr1, iqr3, qtl1, qtl3, median)
 #' 
 #' @return htmlwidget object
 #'
@@ -55,7 +56,7 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
                          events=NULL, afterRender=NULL, 
                          width=600, height=400, 
                          pretty=FALSE, digits=4, ..., 
-                         boxplotGroupData=FALSE) {
+                         boxplotGroupData = NULL) {
     
     assertCanvasXpressData(graphType, data, 
                            nodeData, edgeData, 
@@ -92,7 +93,7 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
     else if (graphType == 'Genome') {
         #TBD
     } 
-    else if (graphType == 'Boxplot' && boxplotGroupData) {
+    else if (graphType == 'Boxplot' && !is.null(boxplotGroupData)) {
 
 warning('needs to be finished and consolidated')
         
@@ -121,7 +122,7 @@ warning('needs to be finished and consolidated')
         qtl3 = as.matrix(data["qtl3" ,])
         dimnames(qtl3) <- NULL
 
-        y <- list(vars = as.list(c("Variable1")),
+        y <- list(vars = as.list(boxplotGroupData),
                   smps = smps,
                   iqr1 = iqr1, 
                   iqr3 = iqr3, 
