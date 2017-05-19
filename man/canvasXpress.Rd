@@ -15,7 +15,7 @@ canvasXpress(data = NULL, decorData = NULL, smpAnnot = NULL,
 \item{data}{canvasXpress data frame
 \emph{(rows are refered to variables; columns are refered to samples)}}
 
-\item{decorData}{tbd}
+\item{decorData}{decoration/annotation data for the chart}
 
 \item{smpAnnot}{additional data that applies to samples (columns)}
 

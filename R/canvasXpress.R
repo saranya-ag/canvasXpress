@@ -23,7 +23,7 @@
 #'  
 #' @param data canvasXpress data frame
 #' \emph{(rows are refered to variables; columns are refered to samples)}
-#' @param decorData tbd
+#' @param decorData decoration/annotation data for the chart
 #' @param smpAnnot additional data that applies to samples (columns)
 #' @param varAnnot additional data that applies to variables (rows)
 #' @param nodeData network visualization data nodes
