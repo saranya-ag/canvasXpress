@@ -93,84 +93,59 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
     else if (graphType == 'Genome') {
         #TBD
     } 
-    else if (graphType == 'Boxplot' && !is.null(boxplotGroupData)) {
-
-warning('needs to be finished and consolidated')
-        
-        vars = as.list(assignCanvasXpressRownames(data))
-        smps = as.list(assignCanvasXpressColnames(data))
-        
-        # check var rownames
-        if (!("iqr1" %in% vars) || !("iqr3" %in% vars) ||
-            !("qtl1" %in% vars) || !("qtl3" %in% vars) ||
-            !("median" %in% vars)) {
-            stop('Incorrect Vars for Boxplot Group Data!\n', 'Must include: <iqr1, iqr3, qtl1, qtl3, median>')
-        }
-
-        iqr1 = as.matrix(data["iqr1", ])
-        dimnames(iqr1) <- NULL
-        
-        iqr3 = as.matrix(data["iqr3" ,])
-        dimnames(iqr3) <- NULL
-        
-        median = as.matrix(data["median" ,])
-        dimnames(median) <- NULL
-        
-        qtl1 = as.matrix(data["qtl1" ,])
-        dimnames(qtl1) <- NULL
-        
-        qtl3 = as.matrix(data["qtl3" ,])
-        dimnames(qtl3) <- NULL
-
-        y <- list(vars = as.list(boxplotGroupData),
-                  smps = smps,
-                  iqr1 = iqr1, 
-                  iqr3 = iqr3, 
-                  median = median,
-                  qtl1 = qtl1,
-                  qtl3 = qtl3
-                  )
-        x <- NULL
-        z <- NULL
-        
-        if (!is.null(smpAnnot)) {
-            vars2 = as.list(assignCanvasXpressRownames(smpAnnot))
-            smps2 = as.list(assignCanvasXpressColnames(smpAnnot))
-            if (!identical(vars2, smps)) {
-                smpAnnot <- t(smpAnnot)
-                vars2 = as.list(assignCanvasXpressRownames(smpAnnot))
-                smps2 = as.list(assignCanvasXpressColnames(smpAnnot))
-            }
-            if (!identical(vars2, smps)) {
-                stop("Column names in smpAnnot are different from column names in data")
-            }
-            x <- lapply(convertRowsToList(t(smpAnnot)), function (d) if (length(d) > 1) d else list(d))
-        }
-        if (!is.null(varAnnot)) {
-            vars3 = as.list(assignCanvasXpressRownames(varAnnot))
-            smps3 = as.list(assignCanvasXpressColnames(varAnnot))
-            if (!identical(vars3, vars)) {
-                stop("Row names in varAnnot are different from row names in data")
-            }
-            z <- lapply(convertRowsToList(t(varAnnot)), function (d) if (length(d) > 1) d else list(d))
-        }
-        
-        data <- list(y = y, x = x, z = z)
-        
-        if (!is.null(decorData)) {
-            data[["d"]] <- decorData
-        } 
-        
-        if (!is.null(newickData)) {
-            data[["t"]] <- newickData
-        }
-    }
     else {
         vars = as.list(assignCanvasXpressRownames(data))
         smps = as.list(assignCanvasXpressColnames(data))
-        dy <- as.matrix(data)
-        dimnames(dy) <- NULL
-        y <- list(vars = vars, smps = smps, data = dy)
+        
+        if (graphType == 'Boxplot' && !is.null(boxplotGroupData)) {
+warning('WORKING')
+            
+            if (!("iqr1" %in% vars) || !("iqr3" %in% vars) ||
+                !("qtl1" %in% vars) || !("qtl3" %in% vars) ||
+                !("median" %in% vars)) {
+                stop('Incorrect Vars for Boxplot Group Data!\n', 'Must include: <iqr1, iqr3, qtl1, qtl3, median>')
+            }
+warning('MOVE CHECKs')
+            
+            iqr1 = as.matrix(data["iqr1", ])
+            dimnames(iqr1) <- NULL
+            
+            iqr3 = as.matrix(data["iqr3" ,])
+            dimnames(iqr3) <- NULL
+            
+            median = as.matrix(data["median" ,])
+            dimnames(median) <- NULL
+            
+            qtl1 = as.matrix(data["qtl1" ,])
+            dimnames(qtl1) <- NULL
+            
+            qtl3 = as.matrix(data["qtl3" ,])
+            dimnames(qtl3) <- NULL
+            
+            y <- list(vars = as.list(boxplotGroupData),
+                      smps = smps,
+                      iqr1 = iqr1, 
+                      iqr3 = iqr3, 
+                      median = median,
+                      qtl1 = qtl1,
+                      qtl3 = qtl3
+            )
+            
+            if ("out.0" %in% vars) {
+print('outliers found')
+                # there are outlier vars - must be named starting with out."
+                out <- as.matrix(data[grep("^out\\.+", vars), ])
+                # out <- as.matrix(data["out", ])
+                dimnames(out) <- NULL
+                y$out <- out
+            }
+        } #boxplot with summarized data
+        else {
+            dy <- as.matrix(data)
+            dimnames(dy) <- NULL
+            y <- list(vars = vars, smps = smps, data = dy)
+        }
+        
         x <- NULL
         z <- NULL
         if (!is.null(smpAnnot)) {
@@ -204,6 +179,8 @@ warning('needs to be finished and consolidated')
         if (!is.null(newickData)) {
             data[["t"]] <- newickData
         }
+warning('remove save')
+save(data, file = "test.RData")
     }
     
     # Config
