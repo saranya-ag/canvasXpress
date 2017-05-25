@@ -98,8 +98,6 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
         smps = as.list(assignCanvasXpressColnames(data))
         
         if (graphType == 'Boxplot' && !is.null(boxplotGroupData)) {
-warning('WORKING')
-            
             if (!("iqr1" %in% vars) || !("iqr3" %in% vars) ||
                 !("qtl1" %in% vars) || !("qtl3" %in% vars) ||
                 !("median" %in% vars)) {
@@ -134,9 +132,10 @@ warning('MOVE CHECKs')
             if ("out.0" %in% vars) {
 print('outliers found')
                 # there are outlier vars - must be named starting with out."
-                out <- as.matrix(data[grep("^out\\.+", vars), ])
-                # out <- as.matrix(data["out", ])
+                out <- data.matrix(data[grep("^out\\.+", vars), ])
+                out <- t(out)
                 dimnames(out) <- NULL
+print(out[1:5, 1:5])
                 y$out <- out
             }
         } #boxplot with summarized data
