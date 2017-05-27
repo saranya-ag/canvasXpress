@@ -42,26 +42,26 @@
 #' @param ... additional configuration options passed to canvasXpress
 #' @param boxplotGroupData character label for grouped boxplot data.  If there is a 
 #' non-null value and graphType is 'Boxplot' pre-calculated boxplot data is used from
-#' the variables (iqr1, iqr3, qtl1, qtl3, median)
+#' the variables (iqr1, iqr3, qtl1, qtl3, median) and optionally the variable (outliers).
+#' Boxplot outliers should be specified as comma-separated string values in the 
+#' outliers variable.
 #' 
 #' @return htmlwidget object
 #'
 #' @export
-canvasXpress <- function(data = NULL,     decorData = NULL, 
-                         smpAnnot = NULL, varAnnot = NULL, 
-                         nodeData = NULL, edgeData = NULL, 
-                         vennData = NULL, vennLegend = NULL, 
+canvasXpress <- function(data = NULL,       decorData = NULL, 
+                         smpAnnot = NULL,   varAnnot = NULL, 
+                         nodeData = NULL,   edgeData = NULL, 
+                         vennData = NULL,   vennLegend = NULL, 
                          genomeData = NULL, newickData = NULL,
-                         graphType='Scatter2D', 
-                         events=NULL, afterRender=NULL, 
-                         width=600, height=400, 
-                         pretty=FALSE, digits=4, ..., 
+                         graphType ='Scatter2D', events = NULL, afterRender=NULL, 
+                         width  = 600, height=400, pretty = FALSE, digits=4, ..., 
                          boxplotGroupData = NULL) {
     
     assertCanvasXpressData(graphType, data, 
                            nodeData, edgeData, 
                            vennData, vennLegend, 
-                           genomeData)
+                           genomeData, boxplotGroupData)
     assertCanvasXpressDataFrame(graphType, data, 
                                 smpAnnot, varAnnot, 
                                 nodeData, edgeData, 
@@ -98,13 +98,6 @@ canvasXpress <- function(data = NULL,     decorData = NULL,
         smps = as.list(assignCanvasXpressColnames(data))
         
         if (graphType == 'Boxplot' && !is.null(boxplotGroupData)) {
-            if (!("iqr1" %in% vars) || !("iqr3" %in% vars) ||
-                !("qtl1" %in% vars) || !("qtl3" %in% vars) ||
-                !("median" %in% vars)) {
-                stop('Incorrect Vars for Boxplot Group Data!\n', 'Must include: <iqr1, iqr3, qtl1, qtl3, median>')
-            }
-warning('MOVE CHECKs')
-            
             iqr1 = as.matrix(data["iqr1", ])
             dimnames(iqr1) <- NULL
             
@@ -128,15 +121,14 @@ warning('MOVE CHECKs')
                       qtl1 = qtl1,
                       qtl3 = qtl3
             )
-            
-            if ("out.0" %in% vars) {
-print('outliers found')
-                # there are outlier vars - must be named starting with out."
-                out <- data.matrix(data[grep("^out\\.+", vars), ])
-                out <- t(out)
-                dimnames(out) <- NULL
-print(out[1:5, 1:5])
-                y$out <- out
+            if ("outliers" %in% vars) {
+                out <- t(as.matrix(data["outliers", ]))
+
+                out.new <- sapply(out, strsplit, ",")
+                out.new <- unname(sapply(out.new, as.numeric))
+                out.new <- sapply(out.new, as.list)
+
+                y$out <- list(out.new)
             }
         } #boxplot with summarized data
         else {
@@ -178,8 +170,6 @@ print(out[1:5, 1:5])
         if (!is.null(newickData)) {
             data[["t"]] <- newickData
         }
-warning('remove save')
-save(data, file = "test.RData")
     }
     
     # Config
@@ -203,9 +193,10 @@ save(data, file = "test.RData")
                                            digits = digits))
     
     # Create the widget
-    htmlwidgets::createWidget("canvasXpress", cx, 
+    widget <- htmlwidgets::createWidget("canvasXpress", cx, 
                               width = width, 
                               height = height)
+    widget
 }
 
 

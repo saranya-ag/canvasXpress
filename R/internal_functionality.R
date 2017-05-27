@@ -3,7 +3,7 @@ assertCanvasXpressData <- function(graphType = 'Scatter2D',
                                    data = NULL, 
                                    nodeData = NULL, edgeData = NULL, 
                                    vennData = NULL, vennLegend = NULL, 
-                                   genomeData = NULL) {
+                                   genomeData = NULL, boxplotGroupData = NULL) {
     
     if (graphType == 'Network') {
         if (is.null(nodeData)) {
@@ -24,8 +24,18 @@ assertCanvasXpressData <- function(graphType = 'Scatter2D',
             stop("Missing data for Genome visualization")
         }
         stop("Not implemented yet!")
-    } else if (is.null(data)) {
+    } 
+    else if (is.null(data)) {
         stop("Missing canvasXpress data!")
+    }
+    else if (graphType == 'Boxplot' && !is.null(boxplotGroupData)) {
+        vars = as.list(assignCanvasXpressRownames(data))
+        
+        if (!("iqr1" %in% vars) || !("iqr3" %in% vars) ||
+            !("qtl1" %in% vars) || !("qtl3" %in% vars) ||
+            !("median" %in% vars)) {
+            stop('Incorrect Vars for Boxplot Group Data!\n', 'Must include: <iqr1, iqr3, qtl1, qtl3, median>')
+        }  
     }
     
 }
