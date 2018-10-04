@@ -1,5 +1,5 @@
 context("canvasXpress Web Charts - Layout")
-ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
+ifelse(interactive(), source("tests/cX-ui-functions.R"), source("../cX-ui-functions.R"))
 
 
 test_that("cXlayout1", {

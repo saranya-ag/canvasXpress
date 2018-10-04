@@ -31,7 +31,7 @@ if (interactive()) {
                           paste0('system.file("extdata", "', filename, '.txt", package = "canvasXpress")'), orig)) %>%
         mutate(new = gsub('\\$', '$', new, fixed = T))
     
-    writeLines(pkgFile$new, "tests/cX-function.R")
+    writeLines(pkgFile$new, "tests/cX-ui-functions.R")
     
     message("Package must be rebuilt and reloaded in order to realize any new data files for testing")
 } else {
