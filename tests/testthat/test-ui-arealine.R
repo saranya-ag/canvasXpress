@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - AreaLine")
-load_ui_functions()
 
 
 test_that("cXarealine1", {

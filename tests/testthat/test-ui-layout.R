@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Layout")
-load_ui_functions()
 
 
 test_that("cXlayout1", {

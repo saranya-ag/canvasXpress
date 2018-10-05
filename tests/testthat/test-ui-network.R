@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Network")
-load_ui_functions()
 
 
 test_that("cXnetwork1", {

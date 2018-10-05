@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Candlestick")
-load_ui_functions()
 
 
 test_that("cXcandlestick1", {

@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Heatmap")
-load_ui_functions()
 
 
 test_that("cXheatmap1", {

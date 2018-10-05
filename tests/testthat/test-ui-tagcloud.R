@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - TagCloud")
-load_ui_functions()
 
 
 test_that("cXtagcloud1", {

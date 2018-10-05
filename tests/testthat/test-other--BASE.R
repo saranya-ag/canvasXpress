@@ -1,5 +1,4 @@
 context("canvasXpress BASE")
-source("../cX-helper-functions.R")
 
 data1.df  <- data.frame(a = c(1:3), b = c("A", "B", "C"),
                         row.names = c("row1", "row2", "row3"))

@@ -1,8 +1,6 @@
 # helper functions for tests 
 
-load_ui_functions <- function(){
-    ifelse(interactive(), source("tests/cX-ui-functions.R"), source("../cX-ui-functions.R"))
-}
+ifelse(interactive(), source("tests/cX-ui-functions.R"), source("../cX-ui-functions.R"))
 
 check_ui_test <- function(result){
     if (interactive()) { print(result) }

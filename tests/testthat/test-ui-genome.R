@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Genome")
-load_ui_functions()
 
 
 test_that("cXgenome1", {

@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Density")
-load_ui_functions()
 
 
 test_that("cXdensity1", {

@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Pie")
-load_ui_functions()
 
 
 test_that("cXpie1", {

@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Treemap")
-load_ui_functions()
 
 
 test_that("cXtreemap1", {

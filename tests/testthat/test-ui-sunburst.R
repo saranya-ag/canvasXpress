@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Sunburst")
-load_ui_functions()
 
 
 test_that("cXsunburst1", {

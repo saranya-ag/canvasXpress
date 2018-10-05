@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Oncoprint")
-load_ui_functions()
 
 
 test_that("cXoncoprint1", {

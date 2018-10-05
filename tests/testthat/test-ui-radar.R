@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Radar")
-load_ui_functions()
 
 
 test_that("cXradar1", {

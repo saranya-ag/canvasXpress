@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - StackedLine")
-load_ui_functions()
 
 
 test_that("cXstackedline1", {

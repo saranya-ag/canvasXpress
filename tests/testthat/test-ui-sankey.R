@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Sankey")
-load_ui_functions()
 
 
 test_that("cXsankey1", {

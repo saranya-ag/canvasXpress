@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Nonlinearfit")
-load_ui_functions()
 
 
 test_that("cXnonlinearfit1", {

@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Histogram")
-load_ui_functions()
 
 
 test_that("cXhistogram1", {

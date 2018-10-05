@@ -1,6 +1,4 @@
 context("canvasXpress Web Charts - Area")
-load_ui_functions()
-
 
 test_that("cXarea1", {
     result <- cXarea1()

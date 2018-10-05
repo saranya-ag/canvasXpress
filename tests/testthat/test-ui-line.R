@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Line")
-load_ui_functions()
 
 
 test_that("cXline1", {

@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Violin")
-load_ui_functions()
 
 
 test_that("cXviolin1", {

@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Map")
-load_ui_functions()
 
 
 test_that("cXmap1", {

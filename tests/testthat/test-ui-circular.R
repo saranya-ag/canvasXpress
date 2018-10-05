@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Circular")
-load_ui_functions()
 
 
 test_that("cXcircular1", {

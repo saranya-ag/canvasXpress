@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Chord")
-load_ui_functions()
 
 
 test_that("cXchord1", {

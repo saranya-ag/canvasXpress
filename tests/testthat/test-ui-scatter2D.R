@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Scatter2D")
-load_ui_functions()
 
 
 test_that("cXscatter2d1", {

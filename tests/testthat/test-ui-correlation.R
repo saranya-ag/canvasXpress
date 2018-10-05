@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Correlation")
-load_ui_functions()
 
 
 test_that("cXcorrelation1", {

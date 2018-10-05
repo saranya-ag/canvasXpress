@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Bubble")
-load_ui_functions()
 
 
 test_that("cXbubble1", {

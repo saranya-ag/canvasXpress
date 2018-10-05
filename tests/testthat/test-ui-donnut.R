@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Donnut")
-load_ui_functions()
 
 
 test_that("cXdonut1", {

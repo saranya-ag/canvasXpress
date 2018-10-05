@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - Boxplot")
-load_ui_functions()
 
 
 test_that("cXboxplot1", {

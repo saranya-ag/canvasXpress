@@ -1,5 +1,4 @@
 context("canvasXpress Web Charts - DotLine")
-load_ui_functions()
 
 
 test_that("cXdotline1", {
