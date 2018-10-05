@@ -62,7 +62,6 @@ test_that("cXscatter2d12", {
 })
 
 test_that("cXscatter2d13", {
-    result <- cXscatter2d13()
-    check_ui_test(result)
+    check_ui_test(cXscatter2d13())
 })
 

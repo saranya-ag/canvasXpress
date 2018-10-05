@@ -2,83 +2,67 @@ context("canvasXpress Web Charts - Boxplot")
 
 
 test_that("cXboxplot1", {
-    result <- cXboxplot1()
-    check_ui_test(result)
+    check_ui_test(cXboxplot1())
 })
 
 test_that("cXboxplot2", {
-    result <- cXboxplot2()
-    check_ui_test(result)
+    check_ui_test(cXboxplot2())
 })
 
 test_that("cXboxplot3", {
-    result <- cXboxplot3()
-    check_ui_test(result)
+    check_ui_test(cXboxplot3())
 })
 
 test_that("cXboxplot4", {
-    result <- cXboxplot4()
-    check_ui_test(result)
+    check_ui_test(cXboxplot4())
 })
 
 test_that("cXboxplot5", {
-    result <- cXboxplot5()
-    check_ui_test(result)
+    check_ui_test(cXboxplot5())
 })
 
 test_that("cXboxplot6", {
-    result <- cXboxplot6()
-    check_ui_test(result)
+    check_ui_test(cXboxplot6())
 })
 
 test_that("cXboxplot7", {
-    result <- cXboxplot7()
-    check_ui_test(result)
+    check_ui_test(cXboxplot7())
 })
 
 test_that("cXboxplot8", {
-    result <- cXboxplot8()
-    check_ui_test(result)
+    check_ui_test(cXboxplot8())
 })
 
 test_that("cXboxplot9", {
-    result <- cXboxplot9()
-    check_ui_test(result)
+    check_ui_test(cXboxplot9())
 })
 
 test_that("cXboxplot10", {
-    result <- cXboxplot10()
-    check_ui_test(result)
+    check_ui_test(cXboxplot10())
 })
 
 test_that("cXboxplot11", {
-    result <- cXboxplot11()
-    check_ui_test(result)
+    check_ui_test(cXboxplot11())
 })
 
 test_that("cXboxplot12", {
-    result <- cXboxplot12()
-    check_ui_test(result)
+    check_ui_test(cXboxplot12())
 })
 
 test_that("cXboxplot13", {
-    result <- cXboxplot13()
-    check_ui_test(result)
+    check_ui_test(cXboxplot13())
 })
 
 test_that("cXboxplot14", {
-    result <- cXboxplot14()
-    check_ui_test(result)
+    check_ui_test(cXboxplot14())
 })
 
 test_that("cXboxplot15", {
-    result <- cXboxplot15()
-    check_ui_test(result)
+    check_ui_test(cXboxplot15())
 })
 
 test_that("cXboxplot16", {
-    result <- cXboxplot16()
-    check_ui_test(result)
+    check_ui_test(cXboxplot16())
 })
 
 

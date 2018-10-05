@@ -1,31 +1,25 @@
 context("canvasXpress Web Charts - Area")
 
 test_that("cXarea1", {
-    result <- cXarea1()
-    check_ui_test(result)
+    check_ui_test(cXarea1())
 })
 
 test_that("cXarea2", {
-    result <- cXarea2()
-    check_ui_test(result)
+    check_ui_test(cXarea2())
 })
 
 test_that("cXarea3", {
-    result <- cXarea3()
-    check_ui_test(result)
+    check_ui_test(cXarea3())
 })
 
 test_that("cXarea4", {
-    result <- cXarea4()
-    check_ui_test(result)
+    check_ui_test(cXarea4())
 })
 
 test_that("cXarea5", {
-    result <- cXarea5()
-    check_ui_test(result)
+    check_ui_test(cXarea5())
 })
 
 test_that("cXarea6", {
-    result <- cXarea6()
-    check_ui_test(result)
+    check_ui_test(cXarea6())
 })
