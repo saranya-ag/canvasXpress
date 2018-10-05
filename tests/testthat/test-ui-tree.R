@@ -1,36 +1,24 @@
 context("canvasXpress Web Charts - Tree")
-ifelse(interactive(), source("tests/cX-ui-functions.R"), source("../cX-ui-functions.R"))
+load_ui_functions()
 
 
 test_that("cXtree1", {
     result <- cXtree1()
-
-    if (interactive()) { print(result) }
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXtree2", {
     result <- cXtree2()
-
-    if (interactive()) { print(result) }
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXtree3", {
     result <- cXtree3()
-
-    if (interactive()) { print(result) }
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXtree4", {
     result <- cXtree4()
-
-    if (interactive()) { print(result) }
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 

@@ -1,22 +1,18 @@
 context("canvasXpress Web Charts - Pie")
-ifelse(interactive(), source("tests/cX-ui-functions.R"), source("../cX-ui-functions.R"))
+load_ui_functions()
 
 
 test_that("cXpie1", {
     result <- cXpie1()
-    if (interactive()) { print(result) }
+    check_ui_test(result)
     
     warning('pie changes color on mouseover (if plot is not resized)')
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cXpie2", {
     result <- cXpie2()
-    if (interactive()) { print(result) }
+    check_ui_test(result)
     
     warning('pie changes color on mouseover (if plot is not resized)')
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
 })
 

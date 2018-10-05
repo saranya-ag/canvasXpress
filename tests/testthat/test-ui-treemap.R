@@ -1,27 +1,18 @@
 context("canvasXpress Web Charts - Treemap")
-ifelse(interactive(), source("tests/cX-ui-functions.R"), source("../cX-ui-functions.R"))
+load_ui_functions()
 
 
 test_that("cXtreemap1", {
     result <- cXtreemap1()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXtreemap2", {
     result <- cXtreemap2()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXtreemap3", {
     result <- cXtreemap3()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })

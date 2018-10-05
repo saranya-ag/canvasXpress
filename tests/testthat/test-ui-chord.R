@@ -1,27 +1,18 @@
 context("canvasXpress Web Charts - Chord")
-ifelse(interactive(), source("tests/cX-ui-functions.R"), source("../cX-ui-functions.R"))
+load_ui_functions()
 
 
 test_that("cXchord1", {
     result <- cXchord1()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXchord2", {
     result <- cXchord2()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXchord3", {
     result <- cXchord3()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })

@@ -1,26 +1,18 @@
 context("canvasXpress Web Charts - BarLine")
-ifelse(interactive(), source("tests/cX-ui-functions.R"), source("../cX-ui-functions.R"))
+load_ui_functions()
+
 
 test_that("cXbarline1", {
     result <- cXbarline1()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXbarline2", {
     result <- cXbarline2()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXbarline3", {
     result <- cXbarline3()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })

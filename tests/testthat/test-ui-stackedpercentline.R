@@ -1,19 +1,13 @@
 context("canvasXpress Web Charts - StackedPercentLine")
-ifelse(interactive(), source("tests/cX-ui-functions.R"), source("../cX-ui-functions.R"))
+load_ui_functions()
 
 
 test_that("cXstackedpercentline1", {
     result <- cXstackedpercentline1()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXstackedpercentline2", {
     result <- cXstackedpercentline2()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })

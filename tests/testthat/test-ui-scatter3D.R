@@ -1,53 +1,35 @@
 context("canvasXpress Web Charts - Scatter3D")
-ifelse(interactive(), source("tests/cX-ui-functions.R"), source("../cX-ui-functions.R"))
+load_ui_functions()
 
 
 test_that("cXscatter3d1", {
     result <- cXscatter3d1()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXscatter3d2", {
     result <- cXscatter3d2()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXscatter3d3", {
     result <- cXscatter3d3()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXscatter3d4", {
     result <- cXscatter3d4()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXscatter3d5", {
     result <- cXscatter3d5()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXscatter3d6", {
     result <- cXscatter3d6()
-    if (interactive()) { print(result) }
-    
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
+    check_ui_test(result)
 })
 
 test_that("cXscatter3d7", {

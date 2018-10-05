@@ -1,5 +1,5 @@
 context("canvasXpress Web Charts - Genome")
-ifelse(interactive(), source("tests/cX-ui-functions.R"), source("../cX-ui-functions.R"))
+load_ui_functions()
 
 
 test_that("cXgenome1", {
