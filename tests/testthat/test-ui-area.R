@@ -5,7 +5,7 @@ test_that("cXarea1", {
 })
 
 test_that("cXarea2", {
-    check_ui_test(cXarea2())
+    check_ui_test2(cXarea2())
 })
 
 test_that("cXarea3", {
