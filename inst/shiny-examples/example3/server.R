@@ -59,15 +59,17 @@ shinyServer(function(input, output) {
     })
 
     output$selectGenes <- renderUI({
-        d <- ds1()
-        selectInput(
-            "genes",
-            "Select Gene(s)",
-            rownames(d),
-            selectize = FALSE,
-            multiple = TRUE,
-            selected = rownames(d)[1]
-        )
+        d <- data.frame(id = rownames(ds1()), stringsAsFactors = F) %>%
+            left_join(exData$varAnnot, by = "id")
+
+        sel <- d$id %>% as.character()
+        names(sel) <- d$syn
+
+        selectizeInput("genes",
+                       "Select Gene(s)",
+                       sel,
+                       multiple = TRUE,
+                       selected = sel[1])
     })
 
 })
