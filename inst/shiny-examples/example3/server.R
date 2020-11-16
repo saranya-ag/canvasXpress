@@ -53,9 +53,8 @@ shinyServer(function(input, output) {
         colnames(cp)[1] = paste(input$contrast, sep = "")
         colnames(cp)[2] = paste(input$compare,  sep = "")
         comparePlot(cp,
-                    title = paste("Compare/Contrast", paste0(input$contrast),
-                                  "vs", paste0(input$compare), sep = " "),
-                    subtitle = NULL)
+                    title = "Compare/Contrast",
+                    subtitle = paste(paste0(input$contrast), "vs", paste0(input$compare), sep = " "))
     })
 
     output$selectGenes <- renderUI({
@@ -69,7 +68,7 @@ shinyServer(function(input, output) {
                        "Select Gene(s)",
                        sel,
                        multiple = TRUE,
-                       selected = sel[1])
+                       selected = sel[c(1, 2)])
     })
 
 })

@@ -161,7 +161,7 @@ comparePlot <- function(df, title, subtitle, events = NULL) {
     df$group[yindx] = "Y Unique"
     df$group[neitherindx] = "Not Significant"
     df$group <- df$group %>% factor(levels = c("Common", "X Unique", "Y Unique", "Not Significant"))
-    df$order <- with.seed(1954, sample.int(nrow(df))) + nrow(df) * (df$group == "Common") +-nrow(df) * (df$group == "Not Significant")
+    df$order <- with.seed(1954, sample.int(nrow(df))) + nrow(df) * (df$group == "Common") + -nrow(df) * (df$group == "Not Significant")
 
     ## sort df
     df = df[order(df$order), ]
@@ -217,17 +217,17 @@ heatmapPlot <- function(df, smpAnnot, title, subtitle, events = NULL) {
         smpAnnot                 = smpAnnot,
         graphType                = "Heatmap",
         smpOverlays              = list("Group"),
-        smpOverlayProperties     = list(Group = list(thickness = 60, color = "Set1")),
+        smpOverlayProperties     = list(Group = list(thickness = 100, color = "Set1")),
         showSampleNames          = FALSE,
         sortSampleByCategory     = list("Group"),
         heatmapSmpSeparateBy     = "Group",
         variablesClustered       = TRUE,
         showVarDendrogram        = FALSE,
-        heatmapIndicatorPosition = "right",
         colorSpectrum            = c("navy", "white", "firebrick3"),
         title                    = title,
         subtitle                 = subtitle,
         subtitleScaleFontFactor  = 0.5,
+        overlayScaleFontFactor   = 1.5,
         events = events
     )
 }
@@ -252,28 +252,24 @@ genePlot <- function(df, block, title, subtitle, events = NULL) {
             graphOrientation     = "vertical",
             groupingFactors      = c("Group"),
             segregateVariablesBy = list("Gene"),
-            colors               = rep("deepskyblue3",4),
-            title                = "Top Fold Changes Genes",
+            colorBy              = "Group",
+            transparency         = 0.7,
+            title                = "Top Fold Change Genes",
             subtitle             = subtitle,
             xAxisTitle           = "Log2CPM",
-            smpHairline          = TRUE,
-            smpHairlineColor     = "white",
-            smpHairlineWidth     = 1,
-            smpTitle             = "Group",
             xAxis2Show           = FALSE,
-            showLegend           = FALSE,
+            showLegend           = TRUE,
+            showSampleNames      = FALSE,
+            legendPosition       = "top",
+            legendColumns        = 6,
+            showLegendTitle      = FALSE,
             layoutAdjust         = FALSE,
-            # layoutBoxLabelColors = c("rgb(197, 197, 197)", "rgb(197, 197, 197)"),
-            layoutBoxShow   = FALSE,
-            smpLabelRotate  = 60,
-            xAxisMinorTicks = FALSE,
-            boxplotMedianWidth = 2,
-            boxplotMedianColor = "dodgerblue4",
-            boxplotMean        = TRUE,
-            objectBorderColor = "grey",
+            smpLabelRotate       = 45,
+            xAxisMinorTicks      = FALSE,
+            boxplotMedianWidth   = 2,
             subtitleScaleFontFactor = 0.5,
+            smpLabelScaleFontFactor = 0.5,
             events = events
         )
-
     }
 }
