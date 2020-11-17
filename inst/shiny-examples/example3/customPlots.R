@@ -1,7 +1,7 @@
 library(grDevices)
 
 
-profilePlot <- function(df, title, subtitle, events = NULL) {
+profilePlot <- function(df, title, subtitle) {
 
     ## Need a NLP column for sizing
     df$negLog10P = round(-log10(df[["P.Value"]]))
@@ -41,30 +41,30 @@ profilePlot <- function(df, title, subtitle, events = NULL) {
 
     ## CanvasXpress Plot
     canvasXpress(
-        data             = cx,
-        varAnnot         = va,
-        decorations      = d,
-        graphType        = "Scatter2D",
-        colorBy          = "Group",
-        colors           = colors,
-        legendInside     = TRUE,
-        legendPosition   = "bottomRight",
-        showDecorations  = TRUE,
-        showLoessFit     = TRUE,
-        loessColor       = "darkgoldenrod1",
-        sizeBy           = "Group",
-        sizes            = c(10, 10, 4, 10, 12, 14, 16, 18, 20, 22, 24, 26),
-        sizeByShowLegend = FALSE,
-        title            = title,
-        subtitle         = subtitle,
-        xAxis            = list("AveExpr"),
-        yAxis            = list("logFC"),
+        data                    = cx,
+        varAnnot                = va,
+        decorations             = d,
+        graphType               = "Scatter2D",
+        colorBy                 = "Group",
+        colors                  = colors,
+        legendInside            = TRUE,
+        legendPosition          = "bottomRight",
+        showDecorations         = TRUE,
+        showLoessFit            = TRUE,
+        loessColor              = "darkgoldenrod1",
+        sizeBy                  = "Group",
+        sizes                   = c(10, 10, 4, 10, 12, 14, 16, 18, 20, 22, 24, 26),
+        sizeByShowLegend        = FALSE,
+        title                   = title,
+        subtitle                = subtitle,
+        xAxis                   = list("AveExpr"),
+        yAxis                   = list("logFC"),
         subtitleScaleFontFactor = 0.5,
-        events = events
+        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.addItems(o.y.vars); }}")
     )
 }
 
-volcanoPlot <- function(df, title, subtitle, events = NULL) {
+volcanoPlot <- function(df, title, subtitle) {
 
     ## Need a NLP column for sizing
     df$LogInt = df[["AveExpr"]]
@@ -110,28 +110,28 @@ volcanoPlot <- function(df, title, subtitle, events = NULL) {
 
     ## CanvasXpress Plot
     canvasXpress(
-        data             = cx,
-        varAnnot         = va,
-        decorations      = d,
-        graphType        = "Scatter2D",
-        colorBy          = "Group",
-        colors           = colors,
-        legendPosition   = "right",
-        showDecorations  = TRUE,
-        sizeBy           = "LogInt",
-        sizes            = c(4, 10, 12, 14, 16, 18, 20, 22, 24, 26),
-        sizeByShowLegend = TRUE,
-        title            = title,
-        subtitle         = subtitle,
-        xAxis            =  c("logFC", ""),
-        yAxis            = c("NegativeLogP", ""),
-        yAxisTitle       = "-log10(P.Value)",
+        data                    = cx,
+        varAnnot                = va,
+        decorations             = d,
+        graphType               = "Scatter2D",
+        colorBy                 = "Group",
+        colors                  = colors,
+        legendPosition          = "right",
+        showDecorations         = TRUE,
+        sizeBy                  = "LogInt",
+        sizes                   = c(4, 10, 12, 14, 16, 18, 20, 22, 24, 26),
+        sizeByShowLegend        = TRUE,
+        title                   = title,
+        subtitle                = subtitle,
+        xAxis                   =  c("logFC", ""),
+        yAxis                   = c("NegativeLogP", ""),
+        yAxisTitle              = "-log10(P.Value)",
         subtitleScaleFontFactor = 0.5,
-        events           = events
+        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.addItems(o.y.vars); }}")
     )
 }
 
-comparePlot <- function(df, title, subtitle, events = NULL) {
+comparePlot <- function(df, title, subtitle) {
     # helper function
     with.seed <- function(seed, expr) {
         saved.seed <- .Random.seed
@@ -189,52 +189,30 @@ comparePlot <- function(df, title, subtitle, events = NULL) {
 
     ## CanvasXpress Plot
     canvasXpress(
-        data             = cx,
-        varAnnot         = va,
-        decorations      = d,
-        graphType        = "Scatter2D",
-        colorBy          = "Group",
-        colors           = colors,
-        legendInside     = TRUE,
-        legendPosition   = "bottomRight",
-        scatterAxesEqual = TRUE,
-        showDecorations  = TRUE,
-        sizeBy           = "Group",
-        sizes            = c(10, 4, 10, 10, 12, 14, 16, 18, 20, 22, 24, 26),
-        sizeByShowLegend = FALSE,
-        title            = title,
-        subtitle         = subtitle,
-        xAxis            = list(xlabel),
-        yAxis            = list(ylabel),
+        data                    = cx,
+        varAnnot                = va,
+        decorations             = d,
+        graphType               = "Scatter2D",
+        colorBy                 = "Group",
+        colors                  = colors,
+        legendInside            = TRUE,
+        legendPosition          = "bottomRight",
+        scatterAxesEqual        = TRUE,
+        showDecorations         = TRUE,
+        sizeBy                  = "Group",
+        sizes                   = c(10, 4, 10, 10, 12, 14, 16, 18, 20, 22, 24, 26),
+        sizeByShowLegend        = FALSE,
+        title                   = title,
+        subtitle                = subtitle,
+        xAxis                   = list(xlabel),
+        yAxis                   = list(ylabel),
         subtitleScaleFontFactor = 0.5,
-        events = events
+        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.addItems(o.y.vars); }}")
+
     )
 }
 
-heatmapPlot <- function(df, smpAnnot, title, subtitle, events = NULL) {
-    canvasXpress(
-        data                     = df,
-        smpAnnot                 = smpAnnot,
-        graphType                = "Heatmap",
-        smpOverlays              = list("Group"),
-        smpOverlayProperties     = list(Group = list(thickness = 100, color = "Set1")),
-        showSampleNames          = FALSE,
-        sortSampleByCategory     = list("Group"),
-        heatmapSmpSeparateBy     = "Group",
-        variablesClustered       = TRUE,
-        showVarDendrogram        = FALSE,
-        colorSpectrum            = c("navy", "white", "firebrick3"),
-        title                    = title,
-        subtitle                 = subtitle,
-        subtitleScaleFontFactor  = 0.5,
-        overlayScaleFontFactor   = 1.5,
-        events = events
-    )
-}
-
-
-
-genePlot <- function(df, block, title, subtitle, events = NULL) {
+genePlot <- function(df, block, title, subtitle) {
 
     smpAnnot = data.frame(Group = block)
     rownames(smpAnnot) = rownames(t(df))
@@ -242,7 +220,23 @@ genePlot <- function(df, block, title, subtitle, events = NULL) {
     rownames(varAnnot) = rownames(df)
 
     if (length(rownames(varAnnot)) > 4) {
-        heatmapPlot(df, smpAnnot, title, subtitle, events)
+        canvasXpress(
+            data                     = df,
+            smpAnnot                 = smpAnnot,
+            graphType                = "Heatmap",
+            smpOverlays              = list("Group"),
+            smpOverlayProperties     = list(Group = list(thickness = 100, color = "Set1")),
+            showSampleNames          = FALSE,
+            sortSampleByCategory     = list("Group"),
+            heatmapSmpSeparateBy     = "Group",
+            variablesClustered       = TRUE,
+            showVarDendrogram        = FALSE,
+            colorSpectrum            = c("navy", "white", "firebrick3"),
+            title                    = title,
+            subtitle                 = subtitle,
+            subtitleScaleFontFactor  = 0.5,
+            overlayScaleFontFactor   = 1.5
+        )
     } else {
         canvasXpress(
             data                 = df,
@@ -268,8 +262,7 @@ genePlot <- function(df, block, title, subtitle, events = NULL) {
             xAxisMinorTicks      = FALSE,
             boxplotMedianWidth   = 2,
             subtitleScaleFontFactor = 0.5,
-            smpLabelScaleFontFactor = 0.5,
-            events = events
+            smpLabelScaleFontFactor = 0.5
         )
     }
 }

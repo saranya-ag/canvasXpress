@@ -9,11 +9,19 @@ exData <- readRDS("./exData.rds")
 
 shinyServer(function(input, output) {
     ds1 <- reactive({
-        exData$contrasts[[input$contrast]]
+        data <- exData$contrasts[[input$contrast]]
+        rownames(data) <- data.frame(id = rownames(data), stringsAsFactors = F) %>%
+            left_join(exData$varAnnot, by = "id") %>%
+            pull(syn)
+        data
     })
 
     ds2 <- reactive({
-        exData$contrasts[[input$compare]]
+        data <- exData$contrasts[[input$compare]]
+        rownames(data) <- data.frame(id = rownames(data), stringsAsFactors = F) %>%
+            left_join(exData$varAnnot, by = "id") %>%
+            pull(syn)
+        data
     })
 
     output$profilePlot <- renderCanvasXpress({
@@ -25,11 +33,14 @@ shinyServer(function(input, output) {
     output$genePlot <- renderCanvasXpress({
         sel = input$genes
         if (!is.null(sel)) {
+            sel_ids <- exData$varAnnot[exData$varAnnot$syn %in% sel, ]
+
             dat <- exData$Log2CPM
-            dat <- dat[rownames(dat) %in% sel, , drop = FALSE]
-            ant <- exData$varAnnot
-            rownames(dat) <- as.vector(ant[ant$id %in% sel, , drop = FALSE]$syn)
+            dat <- dat[rownames(dat) %in% sel_ids$id, , drop = FALSE]
+            rownames(dat) <- sel_ids$syn[match(rownames(dat), sel_ids$id)]
+
             des <- exData$smpAnnot$ReplicateGroup
+
             genePlot(dat, des, title = "Expression Plot", subtitle = NULL)
         }
     })
@@ -58,17 +69,11 @@ shinyServer(function(input, output) {
     })
 
     output$selectGenes <- renderUI({
-        d <- data.frame(id = rownames(ds1()), stringsAsFactors = F) %>%
-            left_join(exData$varAnnot, by = "id")
-
-        sel <- d$id %>% as.character()
-        names(sel) <- d$syn
-
         selectizeInput("genes",
                        "Select Gene(s)",
-                       sel,
+                       rownames(ds1()),
                        multiple = TRUE,
-                       selected = sel[c(1, 2)])
+                       selected = rownames(ds1())[c(1, 2)])
     })
 
 })
