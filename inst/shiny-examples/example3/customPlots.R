@@ -47,6 +47,7 @@ profilePlot <- function(df, title, subtitle) {
         graphType               = "Scatter2D",
         colorBy                 = "Group",
         colors                  = colors,
+        theme                   = "CanvasXpress",
         legendInside            = TRUE,
         legendPosition          = "bottomRight",
         showDecorations         = TRUE,
@@ -60,7 +61,9 @@ profilePlot <- function(df, title, subtitle) {
         xAxis                   = list("AveExpr"),
         yAxis                   = list("logFC"),
         subtitleScaleFontFactor = 0.5,
-        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.addItems(o.y.vars); }}")
+        width                   = 400,
+        height                  = 400,
+        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars); }}")
     )
 }
 
@@ -114,6 +117,7 @@ volcanoPlot <- function(df, title, subtitle) {
         varAnnot                = va,
         decorations             = d,
         graphType               = "Scatter2D",
+        theme                   = "CanvasXpress",
         colorBy                 = "Group",
         colors                  = colors,
         legendPosition          = "right",
@@ -127,7 +131,9 @@ volcanoPlot <- function(df, title, subtitle) {
         yAxis                   = c("NegativeLogP", ""),
         yAxisTitle              = "-log10(P.Value)",
         subtitleScaleFontFactor = 0.5,
-        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.addItems(o.y.vars); }}")
+        width                   = 400,
+        height                  = 400,
+        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars); }}")
     )
 }
 
@@ -195,6 +201,7 @@ comparePlot <- function(df, title, subtitle) {
         graphType               = "Scatter2D",
         colorBy                 = "Group",
         colors                  = colors,
+        theme                   = "CanvasXpress",
         legendInside            = TRUE,
         legendPosition          = "bottomRight",
         scatterAxesEqual        = TRUE,
@@ -207,7 +214,9 @@ comparePlot <- function(df, title, subtitle) {
         xAxis                   = list(xlabel),
         yAxis                   = list(ylabel),
         subtitleScaleFontFactor = 0.5,
-        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.addItems(o.y.vars); }}")
+        width                   = 400,
+        height                  = 400,
+        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars); }}")
 
     )
 }
@@ -235,6 +244,8 @@ genePlot <- function(df, block, title, subtitle) {
             title                    = title,
             subtitle                 = subtitle,
             subtitleScaleFontFactor  = 0.5,
+            width                    = 400,
+            height                   = 400,
             overlayScaleFontFactor   = 1.5
         )
     } else {
@@ -247,6 +258,7 @@ genePlot <- function(df, block, title, subtitle) {
             groupingFactors      = c("Group"),
             segregateVariablesBy = list("Gene"),
             colorBy              = "Group",
+            theme                = "CanvasXpress",
             transparency         = 0.7,
             title                = "Top Fold Change Genes",
             subtitle             = subtitle,
@@ -255,14 +267,16 @@ genePlot <- function(df, block, title, subtitle) {
             showLegend           = TRUE,
             showSampleNames      = FALSE,
             legendPosition       = "top",
-            legendColumns        = 6,
+            legendColumns        = 3,
             showLegendTitle      = FALSE,
             layoutAdjust         = FALSE,
             smpLabelRotate       = 45,
             xAxisMinorTicks      = FALSE,
             boxplotMedianWidth   = 2,
             subtitleScaleFontFactor = 0.5,
-            smpLabelScaleFontFactor = 0.5
+            smpLabelScaleFontFactor = 0.5,
+            width                   = 400,
+            height                  = 400
         )
     }
 }
