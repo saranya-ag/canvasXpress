@@ -61,8 +61,7 @@ profilePlot <- function(df, title, subtitle) {
         xAxis                   = list("AveExpr"),
         yAxis                   = list("logFC"),
         subtitleScaleFontFactor = 0.5,
-        width                   = 400,
-        height                  = 400,
+        showAnimation           = FALSE,
         events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars); }}")
     )
 }
@@ -131,8 +130,7 @@ volcanoPlot <- function(df, title, subtitle) {
         yAxis                   = c("NegativeLogP", ""),
         yAxisTitle              = "-log10(P.Value)",
         subtitleScaleFontFactor = 0.5,
-        width                   = 400,
-        height                  = 400,
+        showAnimation           = FALSE,
         events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars); }}")
     )
 }
@@ -214,10 +212,8 @@ comparePlot <- function(df, title, subtitle) {
         xAxis                   = list(xlabel),
         yAxis                   = list(ylabel),
         subtitleScaleFontFactor = 0.5,
-        width                   = 400,
-        height                  = 400,
+        showAnimation           = FALSE,
         events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars); }}")
-
     )
 }
 
@@ -230,53 +226,51 @@ genePlot <- function(df, block, title, subtitle) {
 
     if (length(rownames(varAnnot)) > 4) {
         canvasXpress(
-            data                     = df,
-            smpAnnot                 = smpAnnot,
-            graphType                = "Heatmap",
-            smpOverlays              = list("Group"),
-            smpOverlayProperties     = list(Group = list(thickness = 100, color = "Set1")),
-            showSampleNames          = FALSE,
-            sortSampleByCategory     = list("Group"),
-            heatmapSmpSeparateBy     = "Group",
-            variablesClustered       = TRUE,
-            showVarDendrogram        = FALSE,
-            colorSpectrum            = c("navy", "white", "firebrick3"),
-            title                    = title,
-            subtitle                 = subtitle,
-            subtitleScaleFontFactor  = 0.5,
-            width                    = 400,
-            height                   = 400,
-            overlayScaleFontFactor   = 1.5
+            data                    = df,
+            smpAnnot                = smpAnnot,
+            graphType               = "Heatmap",
+            smpOverlays             = list("Group"),
+            smpOverlayProperties    = list(Group = list(thickness = 100, color = "Set1")),
+            showSampleNames         = FALSE,
+            sortSampleByCategory    = list("Group"),
+            heatmapSmpSeparateBy    = "Group",
+            variablesClustered      = TRUE,
+            showVarDendrogram       = FALSE,
+            colorSpectrum           = c("navy", "white", "firebrick3"),
+            title                   = title,
+            subtitle                = subtitle,
+            subtitleScaleFontFactor = 0.5,
+            overlayScaleFontFactor  = 1.5,
+            showAnimation           = FALSE
         )
     } else {
         canvasXpress(
-            data                 = df,
-            smpAnnot             = smpAnnot,
-            varAnnot             = varAnnot,
-            graphType            = "Boxplot",
-            graphOrientation     = "vertical",
-            groupingFactors      = c("Group"),
-            segregateVariablesBy = list("Gene"),
-            colorBy              = "Group",
-            theme                = "CanvasXpress",
-            transparency         = 0.7,
-            title                = "Top Fold Change Genes",
-            subtitle             = subtitle,
-            xAxisTitle           = "Log2CPM",
-            xAxis2Show           = FALSE,
-            showLegend           = TRUE,
-            showSampleNames      = FALSE,
-            legendPosition       = "top",
-            legendColumns        = 3,
-            showLegendTitle      = FALSE,
-            layoutAdjust         = FALSE,
-            smpLabelRotate       = 45,
-            xAxisMinorTicks      = FALSE,
-            boxplotMedianWidth   = 2,
+            data                    = df,
+            smpAnnot                = smpAnnot,
+            varAnnot                = varAnnot,
+            graphType               = "Boxplot",
+            graphOrientation        = "vertical",
+            groupingFactors         = c("Group"),
+            segregateVariablesBy    = list("Gene"),
+            colorBy                 = "Group",
+            theme                   = "CanvasXpress",
+            transparency            = 0.7,
+            title                   = "Top Fold Change Genes",
+            subtitle                = subtitle,
+            xAxisTitle              = "Log2CPM",
+            xAxis2Show              = FALSE,
+            showLegend              = TRUE,
+            showSampleNames         = FALSE,
+            legendPosition          = "top",
+            legendColumns           = 3,
+            showLegendTitle         = FALSE,
+            layoutAdjust            = FALSE,
+            smpLabelRotate          = 45,
+            xAxisMinorTicks         = FALSE,
+            boxplotMedianWidth      = 2,
             subtitleScaleFontFactor = 0.5,
             smpLabelScaleFontFactor = 0.5,
-            width                   = 400,
-            height                  = 400
+            showAnimation           = FALSE,
         )
     }
 }
