@@ -1,6 +1,22 @@
 library(grDevices)
 
+## Helper function
+render_plot <- function(cxplot, textMessage) {
+    if (!is.null(cxplot)) {
+        tags$div(width = "100%",
+                 align = "center",
+                 style = "height: 400px;",
+                 cxplot)
+    } else {
+        tags$div(width = "100%",
+                 align = "center",
+                 style = "height: 400px;",
+                 HTML(rep("<br/>", 5)),
+                 tags$p(style = "color:grey;", textMessage))
+    }
+}
 
+## Custom plot functions
 profilePlot <- function(df, title, subtitle) {
 
     ## Need a NLP column for sizing
@@ -62,7 +78,8 @@ profilePlot <- function(df, title, subtitle) {
         yAxis                   = list("logFC"),
         subtitleScaleFontFactor = 0.5,
         showAnimation           = FALSE,
-        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars); }}")
+        width                   = "100%",
+        events                  = JS("{'select': function(o, e, t){if (o.y != null) { var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars);} }}")
     )
 }
 
@@ -131,7 +148,8 @@ volcanoPlot <- function(df, title, subtitle) {
         yAxisTitle              = "-log10(P.Value)",
         subtitleScaleFontFactor = 0.5,
         showAnimation           = FALSE,
-        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars); }}")
+        width                   = "100%",
+        events                  = JS("{'select': function(o, e, t){if (o.y != null) { var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars);} }}")
     )
 }
 
@@ -213,7 +231,8 @@ comparePlot <- function(df, title, subtitle) {
         yAxis                   = list(ylabel),
         subtitleScaleFontFactor = 0.5,
         showAnimation           = FALSE,
-        events                  = JS("{'select': function(o, e, t){ var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars); }}")
+        width                   = "100%",
+        events                  = JS("{'select': function(o, e, t){if (o.y != null) { var g = $('#genes'); g[0].selectize.clear(); g[0].selectize.addItems(o.y.vars);} }}")
     )
 }
 
@@ -241,7 +260,8 @@ genePlot <- function(df, block, title, subtitle) {
             subtitle                = subtitle,
             subtitleScaleFontFactor = 0.5,
             overlayScaleFontFactor  = 1.5,
-            showAnimation           = FALSE
+            showAnimation           = FALSE,
+            width                   = "100%"
         )
     } else {
         canvasXpress(
@@ -271,6 +291,7 @@ genePlot <- function(df, block, title, subtitle) {
             subtitleScaleFontFactor = 0.5,
             smpLabelScaleFontFactor = 0.5,
             showAnimation           = FALSE,
+            width                   = "100%"
         )
     }
 }
