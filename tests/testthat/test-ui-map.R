@@ -43,7 +43,21 @@ if (interactive()) {
     })
 
     test_that("cXmap11", {
-        check_ui_test(cXmap10())
+        check_ui_test(cXmap11())
+    })
+
+    test_that("cXmap12", {
+        skip_if_not(t_data_latest, 'canvasXpress.data is not of sufficient version for these tests')
+
+        check_ui_test(cXmap12())
+    })
+
+    test_that("cXmap13", {
+        check_ui_test(cXmap13())
+    })
+
+    test_that("cXmap14", {
+        check_ui_test(cXmap14())
     })
 } else {
     message("Non-interactive ui-map tests skipped")
